@@ -5,6 +5,6 @@ if (isset($_POST['send'])) {
     $sql="insert into tasks (name) values('$name')";
     $val=$db->query($sql);
     if($val){
-        echo "Successfuly";
+        header('location: index.php');
     }
 }
