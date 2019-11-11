@@ -6,10 +6,18 @@ and open the template in the editor.
 -->
 <?php
 include 'db.php';
-$id=$_GET['id'];
+$id = $_GET['id'];
 $sql = "select * from tasks where id='$id'";
-$rows = $db->query($sql)
+$rows = $db->query($sql);
+$row = $rows->fetch_assoc();
+if (isset($_POST['send'])) {
 
+    $task = $_POST['task'];
+
+    $sql1 = "UPDATE tasks set name='$task' WHERE id= '$id'";
+    $db->query($sql1);
+    header('location: index.php');
+}
 ?>
 <html>
     <head>
@@ -34,7 +42,7 @@ $rows = $db->query($sql)
     <body>
 
         <div class="container">
-            <center><h1>Todo list</h1></center> 
+            <center><h1>Update Todo list</h1></center> 
 
             <div class="row" style="margin-top: 70px;">
                 <div class="col-md-10 col-md-offset-1">
@@ -43,10 +51,10 @@ $rows = $db->query($sql)
                         <hr><br>
                         <!-- The Modal -->
 
-                                        <form method="post" action="add.php">
+                                        <form method="post">
                                             <div class="form-group">
                                                 <label>Task Name</label>
-                                                <input type="text" required name="task" class="form-control">
+                                                <input type="text" required name="task" value="<?php echo $row['name'];?>" class="form-control">
                                             </div>
                                             <input type="submit" name="send" value="send" class="btn btn-success">
                                         </form>

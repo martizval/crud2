@@ -6,9 +6,13 @@ and open the template in the editor.
 -->
 <?php
 include 'db.php';
-$sql = "select * from tasks";
+$page = (isset($GET['page']) ? $GET['page'] : 1);
+$perPage = (isset($GET['per-page']) && ($GET['per-page']) <= 50 ? $GET['per-page'] : 5);
+$start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
+$sql = "select * from tasks limit" . $start . "," . $perPage . " ";
+$total = $db->query("select * from tasks")->num_rows;
+$pages=$total / $perPage;
 $rows = $db->query($sql)
-
 ?>
 <html>
     <head>
