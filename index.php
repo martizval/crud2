@@ -86,9 +86,9 @@ $rows = $db->query($sql)
                                 
                                 <th><?php echo $row['id']?></th>
                                 <td class="col-md-10"><?php echo $row['name']?></td>
-                                <td><a href="" class="btn btn-success">
+                                <td><a href="update.php?id=<?php echo $row['id'];?>" class="btn btn-success">
                                         Edit</a></td>
-                                <td><a href="" class="btn btn-danger">
+                                        <td><a href="delete.php?id=<?php echo $row['id'];?>" class="btn btn-danger">
                                         Delete</a></td>
                             </tr>
                             <?php endwhile; ?>
